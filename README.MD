@@ -1,31 +1,21 @@
-# 리눅스 서버에서 중국 IP 대역 차단하기
+# bash-ban-cn-ipaddress
 
-## 주의 :
-**!!! 아 직 미 완 성 !!!, 작동은 합니다.**
+NAS 운영하면서 중국이 공격하는게 거슬려서 만든 단순한 스크립트입니다.
 
-계속 중국에서 ssh 접속로그 찍히는게 눈에 거슬려서
-bash 공부할겸 만들어 봤습니다.
+bash 공부해볼겸 만들어봤어요
+
+주의 : 작동은 하지만(아마), 아직은 작업중입니다.
+
 
 ## 필요한 패키지 
 ```bash
 wc
 iptables
-# curl(곧 추가됩니다!)
+curl
 ```
 
+## 차후 구현할 기능
 
-## 중국 CIDR 파일 받은곳
-`www.ipdeny.com/ipblocks/data/countries/cn.zone`
-`https://www.ip2location.com/free/visitor-blocker`
+1. 파일 열어서 규칙 적용하기
+2. 중국뿐만이 아닌 기타 국가들 추가하기
 
-## memo
-
-```bash
-sudo iptables -A INPUT -t filter -s xx.xx.xx.xx/24 -j DROP
-```
-### OMV6는 데비안 기반이라 뭔가 바뀐듯
-https://arstech.net/install-iptables-in-debian-11-bullseye/
-
-```
-iptables-save > /etc/iptables/rules.v4
-```
