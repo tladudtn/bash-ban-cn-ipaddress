@@ -3,19 +3,21 @@
 # 처음에 프로그램 실행하면, 필요한 필수 패키지 확인한 후 국가별 IP 파일들 받기 
 # 패키지 확인 -> 국가별 IP 범위 받기 -> 국가 선택후 정책 허용/차단 결정
 
+mkdir rules
 rules_dir="./rules"
 LOCAL=""
 FILE_NAME=""
 FILE_LINE="0"
- 
+
+# 프로그램에 필요한 패키지들 확인  
 function chk_package() {
-if [ -z $(which iptables) ]; then
+if [ -z $(sudo which iptables) ] || [ -z $(which iptables) ]; then
         echo "[X] iptables not found"
         exit 1
-    elif [ -z $(which curl) ]; then
+    elif [ -z $(sudo which curl) ] || [ -z $(which curl) ]; then
         echo "[X] curl not found"
         exit 1
-    elif [ -z $(which wc) ]; then
+    elif [ -z $(sudo which wc) ] || [ -z $(which wc) ]; then
         echo "[X] wc not found"
         exit 1
 else {
@@ -28,7 +30,7 @@ fi
 select_menu() {
     echo " [    MENU    ]"
     echo "1. Select Coutury & BAN IP"
-    echo "2. Select Coutury & UNBAN IP"  
+    #echo "2. Select Coutury & UNBAN IP"  
     echo -e "3. exit"
     echo -n "[1~3]: " 
     read MENU
@@ -52,8 +54,8 @@ function ban_or_unban() {
 
     if [ $MENU -eq 1 ]; then
         ban_ip
-        elif [ $MENU -eq 2 ]; then
-            unban_ip
+#        elif [ $MENU -eq 2 ]; then
+#            unban_ip
     else {
         clear
         ban_or_unban
@@ -140,4 +142,4 @@ function select_contury {
 
 chk_package
 select_menu
-echo EOF
+echo check rules and save your self
